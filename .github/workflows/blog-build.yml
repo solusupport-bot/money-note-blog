@@ -1,0 +1,91 @@
+name: 블로그 빌드 & 배포
+
+# 자동화 트리거
+#  1) 저장소 내용이 바뀌어 push 되면 자동 빌드
+#  2) 매시 정각(KST 기준)에 깨어나 '오늘의 발행 시각'인지 확인하고,
+#     맞을 때만 큐에서 새 글 초안을 생성해 발행한다.
+#     발행 시각 자체가 날짜마다 달라지므로 매일 같은 시각에 올라가지 않는다.
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 * * * *'    # 매시 정각(UTC) 실행 - 실제 발행 여부는 publish_gate.py 가 결정
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      should_deploy: ${{ steps.decide.outputs.result }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 오늘의 발행 시각인지 확인
+        id: gate
+        if: github.event_name == 'schedule'
+        run: python3 automation/publish_gate.py
+        continue-on-error: true
+
+      - name: 목표 시각까지 랜덤 대기
+        if: github.event_name == 'schedule' && steps.gate.outputs.should_publish == 'true'
+        run: sleep "${{ steps.gate.outputs.wait_seconds }}"
+
+      - name: 새 글 초안 생성
+        if: github.event_name != 'schedule' || steps.gate.outputs.should_publish == 'true'
+        run: |
+          cd automation
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            python3 new_post.py || echo "대기 주제 없음 - 건너뜀"
+          fi
+
+      - name: 사이트 빌드
+        if: github.event_name != 'schedule' || steps.gate.outputs.should_publish == 'true'
+        run: |
+          cd automation
+          python3 build.py
+
+      - name: 변경분 커밋 (초안/빌드 결과)
+        if: github.event_name == 'schedule' && steps.gate.outputs.should_publish == 'true'
+        run: |
+          git config user.name "blog-bot"
+          git config user.email "actions@github.com"
+          git add content/ automation/topics.json site/
+          git commit -m "chore: 신규 글 발행 및 사이트 빌드" || echo "변경 없음"
+          git push || echo "push 생략"
+
+      - name: GitHub Pages 아티팩트 업로드
+        if: github.event_name != 'schedule' || steps.gate.outputs.should_publish == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: 배포 여부 기록
+        id: decide
+        if: always()
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ] || [ "${{ steps.gate.outputs.should_publish }}" = "true" ]; then
+            echo "result=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "result=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  deploy:
+    needs: build
+    if: needs.build.outputs.should_deploy == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: GitHub Pages 배포
+        id: deployment
+        uses: actions/deploy-pages@v4

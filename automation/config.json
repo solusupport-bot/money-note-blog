@@ -1,0 +1,17 @@
+{
+  "site_name": "알뜰살뜰 머니노트",
+  "site_tagline": "새는 돈을 막고, 모으는 힘을 키우는 생활 재테크 정보",
+  "author": "머니노트 편집팀",
+  "base_url": "https://solusupport-bot.github.io/money-note-blog",
+  "email": "solu.support@gmail.com",
+  "adsense_client": "ca-pub-0000000000000000",
+  "language": "ko",
+  "posts_per_day": 1,
+  "categories": [
+    "생활비 절약",
+    "청년·정부지원금",
+    "통장·예적금",
+    "세금·연말정산",
+    "구독·통신비 관리"
+  ]
+}
