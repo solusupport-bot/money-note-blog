@@ -145,6 +145,8 @@ def page(cfg, title, description, body, canonical, is_post=False, og_image=None)
     )
     og = f'<meta property="og:image" content="{og_image}">' if og_image else ""
     year = datetime.now().year
+    gsc = cfg.get("google_site_verification")
+    gsc_tag = f'<meta name="google-site-verification" content="{gsc}" />' if gsc else ""
     return f"""<!doctype html>
 <html lang="{cfg['language']}">
 <head>
@@ -154,6 +156,7 @@ def page(cfg, title, description, body, canonical, is_post=False, og_image=None)
 <meta name="description" content="{html.escape(description)}">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="{p}/style.css">
+{gsc_tag}
 {og}
 {adsense}
 </head>
