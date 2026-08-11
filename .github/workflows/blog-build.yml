@@ -39,12 +39,12 @@ jobs:
         if: github.event_name == 'schedule' && steps.gate.outputs.should_publish == 'true'
         run: sleep "${{ steps.gate.outputs.wait_seconds }}"
 
-      - name: 새 글 초안 생성
+      - name: 완성 원고 중 다음 글 발행
         if: github.event_name != 'schedule' || steps.gate.outputs.should_publish == 'true'
         run: |
           cd automation
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            python3 new_post.py || echo "대기 주제 없음 - 건너뜀"
+            python3 publish_next.py || echo "발행할 원고 없음 - 건너뜀"
           fi
 
       - name: 사이트 빌드

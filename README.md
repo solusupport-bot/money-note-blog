@@ -1,7 +1,8 @@
 # 알뜰살뜰 머니노트 — 블로그 자동화 (애드센스 승인용)
 
-생활 재테크·절약 정보를 다루는 정적 블로그와, 글을 자동으로 생성·빌드·배포하는 파이프라인입니다.
+생활 재테크·절약 정보를 다루는 정적 블로그와, 글을 자동으로 빌드·배포하는 파이프라인입니다.
 **목표는 구글 애드센스 승인**이며, 그에 맞춰 원본성·유용성·필수 페이지·색인 요소를 갖추도록 설계했습니다.
+(이전에는 `desktop-tutorial` 저장소 안에 있었으나, 무관한 저장소와 섞이지 않도록 이 저장소로 분리했습니다.)
 
 ## 왜 이 주제인가 (승인 관점)
 
@@ -15,56 +16,74 @@
 ## 폴더 구조
 
 ```
-money-blog/
+/
 ├─ automation/
-│  ├─ config.json      # 사이트 이름·애드센스 pub·카테고리 설정
-│  ├─ topics.json      # 발행 대기 주제 큐
-│  ├─ build.py         # 정적 사이트 빌드 엔진 (표준 라이브러리만)
-│  └─ new_post.py      # 큐에서 새 글 초안(.md) 자동 생성
-├─ content/posts/*.md  # 원고 (프론트매터 + 마크다운)
-└─ site/               # 빌드 결과 (배포 대상)
+│  ├─ config.json        # 사이트 이름·도메인·애드센스 pub 설정
+│  ├─ topics.json         # 발행 이력 기록 + 향후 아이디어 목록
+│  ├─ build.py             # 정적 사이트 빌드 엔진 (표준 라이브러리만)
+│  ├─ publish_next.py     # drafts에서 다음 완성 원고 1편을 posts로 발행
+│  ├─ publish_gate.py     # 오늘의 발행 '시각'을 날짜 기반으로 랜덤 결정
+│  └─ new_post.py          # (수동용) 새 주제의 초안 뼈대 생성
+├─ content/
+│  ├─ posts/*.md            # 이미 발행된 글
+│  └─ drafts/*.md           # 발행 대기 중인 "완성" 원고 (파일명 순서 = 발행 순서)
+└─ site/                    # 빌드 결과물 (GitHub Pages 배포 대상)
    ├─ index.html, about.html, privacy.html, contact.html
    ├─ posts/*.html
    └─ sitemap.xml, robots.txt, ads.txt, style.css
 ```
 
-## 사용법
+## 자동 발행 원리 — "미리 다 써두고, 매일 하나씩 꺼낸다"
 
-```bash
-# 1) 큐에서 새 글 초안 생성 (content/posts 에 .md 뼈대 생성)
-cd money-blog/automation
-python3 new_post.py            # 또는  python3 new_post.py "직접 정한 제목"
+이 자동화는 글을 **그 자리에서 지어내지 않습니다.** 품질이 애드센스 승인의 핵심이기 때문에,
+사람(또는 미리 작성한 원고)이 완성해둔 글만 `content/drafts/`에 쌓아두고,
+매일 그중 파일명 순서가 가장 빠른 것 하나를 `publish_next.py`가 `content/posts/`로 옮기며
+날짜를 오늘 날짜로 갱신합니다. 즉, "새 글을 자동 생성"하는 게 아니라 "미리 승인된 글을 예약 발행"하는 구조입니다.
 
-# 2) 초안(.md) 내용을 채운다  (content/posts/<slug>.md)
-
-# 3) 사이트 빌드
-python3 build.py               # site/ 에 HTML·sitemap 등 생성
-
-# 4) site/ 폴더를 정적 호스팅(GitHub Pages, Netlify 등)에 배포
-```
-
-`.github/workflows/blog-build.yml` 이 push·매시 예약·수동 실행 시 자동으로 빌드하고 GitHub Pages로 배포합니다.
+`content/drafts/` 가 비면 더 이상 자동 발행되지 않으니, 주기적으로 완성 원고를 채워 넣어야 합니다.
 
 ### 발행 시각을 매일 다르게 (봇처럼 보이지 않도록)
 
-매일 정각(예: 08:00)에 딱 맞춰 올라오면 자동화 티가 나기 쉽습니다. 그래서 워크플로우는
-**매시 정각에 깨어나기만 하고**, `automation/publish_gate.py` 가 그날의 발행 시각을
-07:00~23:00(KST) 사이에서 날짜 기반으로 무작위로 정해 그 시각에만 실제로 글을 발행합니다.
-같은 시각을 반복하지 않도록 날짜마다 다른 시:분이 나오며, 목표 분(分)까지는 추가로
-랜덤 대기 후 커밋하므로 실제 발행 시각도 정각에서 벗어납니다.
+워크플로우는 **매시 정각에 깨어나기만 하고**, `publish_gate.py`가 그날의 발행 시각을
+07:00~23:00(KST) 사이에서 날짜 기반으로 무작위로 정합니다. 목표 시각이 된 시간에만
+`publish_next.py`가 실행되며, 목표 '분'까지 추가로 랜덤 대기 후 커밋하므로 실제 발행 시각도
+정각에서 벗어납니다. 날짜마다 다른 시:분이 나오도록 설계돼 있어 "매일 같은 시각"에 올라가지 않습니다.
+
+`.github/workflows/blog-build.yml` 이 push·매시 예약·수동 실행 시 자동으로 빌드하고 GitHub Pages로 배포합니다.
+
+## 로컬에서 쓰는 법
+
+```bash
+# 완성 원고를 content/drafts/ 에 파일명 순서(01-, 02-, ...)로 추가
+
+# 다음 순번 1편을 발행 (drafts -> posts, 날짜 오늘로 갱신)
+cd automation
+python3 publish_next.py
+
+# 사이트 빌드
+python3 build.py               # site/ 에 HTML·sitemap 등 생성
+
+# (수동) 새 주제의 초안 뼈대만 만들고 싶을 때
+python3 new_post.py "제목"      # content/posts/<slug>.md 뼈대 생성 - 내용은 직접 채울 것
+```
+
+## GitHub Pages 배포 (최초 1회, 수동)
+
+1. 저장소 **Settings → Pages**
+2. **Build and deployment → Source**: `GitHub Actions` 선택
+3. 저장 후 **Actions** 탭에서 `블로그 빌드 & 배포` 워크플로우를 `Run workflow`로 한 번 수동 실행
+4. 몇 분 뒤 `https://<계정>.github.io/money-note-blog/` 로 접속 확인
 
 ## 애드센스 승인 체크리스트
 
-승인 신청 전, 아래를 모두 만족시키는 것을 권장합니다.
-
-- [ ] **양질의 원본 글 15~25편 이상** (현재 시드 6편 → 큐 소진하며 늘리기)
-- [ ] **필수 페이지**: 소개 / 개인정보처리방침 / 문의 — *자동 생성됨*
-- [ ] **명확한 내비게이션**과 사이트 구조 — *자동 생성됨*
-- [ ] **sitemap.xml / robots.txt** 제출 및 서치콘솔 색인 — *자동 생성됨*
-- [ ] **독자적인 도메인 연결** (`config.json` 의 `base_url` 수정)
-- [ ] **애드센스 pub 번호 입력**: `config.json` 의 `adsense_client` 를 실제 값(`ca-pub-...`)으로 교체하면 광고 스크립트와 `ads.txt` 가 자동 반영됨
-- [ ] 각 글은 **1,000자 이상, 표·목록으로 구조화**, 중복/복붙 금지
-- [ ] 저작권 있는 이미지·문구 사용 금지 (직접 작성 또는 라이선스 확인)
+- [x] **양질의 원본 글**: 발행 6편 + 발행 대기(완성) 7편 = 총 13편 확보 (7일 매일 1편 발행 시 소진 없음)
+- [x] **필수 페이지**: 소개 / 개인정보처리방침 / 문의 — *자동 생성*
+- [x] **sitemap.xml / robots.txt** — *자동 생성*
+- [ ] **GitHub Pages 활성화** (위 "최초 1회 수동" 단계)
+- [ ] **커스텀 도메인 연결** — 지금은 `github.io/money-note-blog` 하위 경로로 우선 운영, 도메인은 이후 연결 예정 (연결 시 `config.json`의 `base_url`만 바꾸면 사이트 전체 링크가 자동으로 갱신됨)
+- [ ] **애드센스 pub 번호 입력**: `config.json`의 `adsense_client`를 실제 값(`ca-pub-...`)으로 교체 → 광고 스크립트·`ads.txt`에 자동 반영
+- [ ] **Google Search Console 등록 + sitemap 제출**
+- [ ] 신청 전 실제 방문해 모든 페이지가 정상 노출되는지 최종 점검
 
 ## 승인이 잘 되는 글쓰기 원칙
 
@@ -81,7 +100,7 @@ python3 build.py               # site/ 에 HTML·sitemap 등 생성
 | 키 | 설명 |
 | --- | --- |
 | `site_name` / `site_tagline` | 블로그 이름·소개 문구 |
-| `base_url` | 실제 도메인 (sitemap·canonical에 반영) |
+| `base_url` | 사이트 루트 URL. 하위 경로(`.../money-note-blog`)가 포함돼 있으면 사이트 내부 링크에도 자동으로 그 경로가 붙는다. 커스텀 도메인 연결 후엔 루트 도메인만 넣으면 됨 |
 | `adsense_client` | `ca-pub-...` 실제 번호. 기본값(0으로 끝남)이면 광고 스크립트 미삽입 |
 | `email` | 문의·개인정보 담당 이메일 |
 | `categories` | 카테고리 목록 |
