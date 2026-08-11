@@ -131,7 +131,7 @@ def md_to_html(md):
 
 
 # ---------- 공통 레이아웃 ----------
-def page(cfg, title, description, body, canonical, is_post=False, og_image=None):
+def page(cfg, title, description, body, canonical, is_post=False, og_image=None, schema_json=None):
     p = cfg["_prefix"]  # 커스텀 도메인 루트면 "", 프로젝트 하위 경로면 "/repo명"
     adsense = ""
     if cfg.get("adsense_client") and not cfg["adsense_client"].endswith("0000"):
@@ -147,6 +147,13 @@ def page(cfg, title, description, body, canonical, is_post=False, og_image=None)
     year = datetime.now().year
     gsc = cfg.get("google_site_verification")
     gsc_tag = f'<meta name="google-site-verification" content="{gsc}" />' if gsc else ""
+    schema_tag = ""
+    if schema_json:
+        blocks = schema_json if isinstance(schema_json, list) else [schema_json]
+        schema_tag = "\n".join(
+            f'<script type="application/ld+json">{json.dumps(b, ensure_ascii=False)}</script>'
+            for b in blocks
+        )
     return f"""<!doctype html>
 <html lang="{cfg['language']}">
 <head>
@@ -158,6 +165,7 @@ def page(cfg, title, description, body, canonical, is_post=False, og_image=None)
 <link rel="stylesheet" href="{p}/style.css">
 {gsc_tag}
 {og}
+{schema_tag}
 {adsense}
 </head>
 <body>
@@ -176,6 +184,30 @@ def page(cfg, title, description, body, canonical, is_post=False, og_image=None)
 </body>
 </html>
 """
+
+
+def extract_faqs(body):
+    """'> Q. ...' 다음에 오는 '> A. ...' 블록에서 질문/답변 쌍을 뽑아낸다."""
+    lines = body.split("\n")
+    faqs = []
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+        m = re.match(r'^>\s*Q\.\s*(.+)$', line)
+        if m:
+            question = m.group(1).strip()
+            j = i + 1
+            answer_parts = []
+            while j < len(lines) and lines[j].strip().startswith(">"):
+                part = re.sub(r'^>\s*(A\.\s*)?', '', lines[j].strip())
+                answer_parts.append(part)
+                j += 1
+            if answer_parts:
+                faqs.append((question, " ".join(answer_parts).strip()))
+            i = j
+        else:
+            i += 1
+    return faqs
 
 
 def read_posts():
@@ -197,6 +229,7 @@ def read_posts():
         lines = body.split("\n", 1)
         if lines[0].strip().startswith("# "):
             body = lines[1].lstrip("\n") if len(lines) > 1 else ""
+        meta["_faqs"] = extract_faqs(body)
         meta["_body_html"] = md_to_html(body)
         meta["_reading"] = max(1, len(body) // 500)
         posts.append(meta)
@@ -215,6 +248,42 @@ def write_images(cfg, categories):
             f.write(svg)
 
 
+def related_posts(posts, current, limit=3):
+    same_cat = [p for p in posts if p["category"] == current["category"] and p is not current]
+    others = [p for p in posts if p["category"] != current["category"] and p is not current]
+    return (same_cat + others)[:limit]
+
+
+def build_schema(cfg, post, base, img_url):
+    article = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": post["title"],
+        "description": post["description"],
+        "datePublished": post["date"],
+        "dateModified": post["date"],
+        "image": img_url,
+        "author": {"@type": "Organization", "name": cfg["author"]},
+        "publisher": {"@type": "Organization", "name": cfg["site_name"]},
+        "mainEntityOfPage": f'{base}/posts/{post["slug"]}.html',
+    }
+    schemas = [article]
+    if post["_faqs"]:
+        schemas.append({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": q,
+                    "acceptedAnswer": {"@type": "Answer", "text": a},
+                }
+                for q, a in post["_faqs"]
+            ],
+        })
+    return schemas
+
+
 def build():
     cfg = load_config()
     os.makedirs(POSTS_OUT, exist_ok=True)
@@ -228,6 +297,17 @@ def build():
     for p in posts:
         img_slug = slug_for(p["category"])
         img_url = f'{prefix}/images/banner-{img_slug}.svg'
+        img_url_abs = f'{base}/images/banner-{img_slug}.svg'
+
+        related = related_posts(posts, p)
+        related_html = ""
+        if related:
+            items = "".join(
+                f'<li><a href="{prefix}/posts/{r["slug"]}.html">{html.escape(r["title"])}</a></li>'
+                for r in related
+            )
+            related_html = f'<section class="related"><h2>관련 글</h2><ul>{items}</ul></section>'
+
         article = (
             f'<article>'
             f'<img class="hero-img" src="{img_url}" alt="{html.escape(p["category"])} 대표 이미지" loading="lazy">'
@@ -235,12 +315,14 @@ def build():
             f' · {p["date"]} · 읽는 시간 약 {p["_reading"]}분</p>'
             f'<h1>{html.escape(p["title"])}</h1>'
             f'{p["_body_html"]}'
+            f'{related_html}'
             f'</article>'
             f'<p class="back"><a href="{prefix}/index.html">← 목록으로</a></p>'
         )
         out = page(cfg, p["title"], p["description"], article,
                    f'{base}/posts/{p["slug"]}.html', is_post=True,
-                   og_image=f'{base}/images/banner-{img_slug}.svg')
+                   og_image=img_url_abs,
+                   schema_json=build_schema(cfg, p, base, img_url_abs))
         with open(os.path.join(POSTS_OUT, f'{p["slug"]}.html'), "w", encoding="utf-8") as f:
             f.write(out)
 
@@ -392,6 +474,10 @@ main{max-width:760px;margin:0 auto;padding:28px 20px}
 .post th,.post td{border:1px solid var(--line);padding:9px 11px;text-align:left}
 .post th{background:var(--soft)}
 blockquote{border-left:4px solid var(--line);margin:1.2em 0;padding:4px 16px;color:var(--muted);background:var(--soft)}
+.related{margin-top:2.4em;padding-top:1.4em;border-top:1px solid var(--line)}
+.related h2{border:none;padding:0;margin:0 0 .6em}
+.related ul{margin:0;padding-left:1.2em}
+.related li{margin:.3em 0}
 .back{margin-top:32px}
 .site-footer{border-top:1px solid var(--line);margin-top:40px;padding:24px 20px;text-align:center;color:var(--muted);font-size:.85rem}
 .site-footer a{color:var(--muted)}
