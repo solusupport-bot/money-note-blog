@@ -18,6 +18,8 @@ import html
 from datetime import datetime, timezone
 from urllib.parse import urlsplit
 
+from images import slug_for, svg_banner
+
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AUTO = os.path.join(BASE, "automation")
 POSTS_SRC = os.path.join(BASE, "content", "posts")
@@ -129,7 +131,7 @@ def md_to_html(md):
 
 
 # ---------- 공통 레이아웃 ----------
-def page(cfg, title, description, body, canonical, is_post=False):
+def page(cfg, title, description, body, canonical, is_post=False, og_image=None):
     p = cfg["_prefix"]  # 커스텀 도메인 루트면 "", 프로젝트 하위 경로면 "/repo명"
     adsense = ""
     if cfg.get("adsense_client") and not cfg["adsense_client"].endswith("0000"):
@@ -141,6 +143,7 @@ def page(cfg, title, description, body, canonical, is_post=False):
         f'<a href="{p}/privacy.html">개인정보처리방침</a>'
         f'<a href="{p}/contact.html">문의</a>'
     )
+    og = f'<meta property="og:image" content="{og_image}">' if og_image else ""
     year = datetime.now().year
     return f"""<!doctype html>
 <html lang="{cfg['language']}">
@@ -151,6 +154,7 @@ def page(cfg, title, description, body, canonical, is_post=False):
 <meta name="description" content="{html.escape(description)}">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="{p}/style.css">
+{og}
 {adsense}
 </head>
 <body>
@@ -185,11 +189,27 @@ def read_posts():
         meta.setdefault("date", datetime.now().strftime("%Y-%m-%d"))
         meta.setdefault("category", "생활비 절약")
         meta.setdefault("description", meta["title"])
+        # 본문 첫 줄이 "# 제목" H1이면 제거 - 페이지 템플릿이 title로 별도의
+        # <h1>을 이미 렌더링하므로, 안 지우면 제목이 두 번 나오게 된다.
+        lines = body.split("\n", 1)
+        if lines[0].strip().startswith("# "):
+            body = lines[1].lstrip("\n") if len(lines) > 1 else ""
         meta["_body_html"] = md_to_html(body)
         meta["_reading"] = max(1, len(body) // 500)
         posts.append(meta)
     posts.sort(key=lambda p: p["date"], reverse=True)
     return posts
+
+
+def write_images(cfg, categories):
+    images_dir = os.path.join(SITE, "images")
+    os.makedirs(images_dir, exist_ok=True)
+    slugs = {slug_for(c) for c in categories} | {"site"}
+    for slug in slugs:
+        category = next((c for c in categories if slug_for(c) == slug), None)
+        svg = svg_banner(category or cfg["site_name"], cfg["site_name"])
+        with open(os.path.join(images_dir, f"banner-{slug}.svg"), "w", encoding="utf-8") as f:
+            f.write(svg)
 
 
 def build():
@@ -199,10 +219,15 @@ def build():
     base = cfg["base_url"].rstrip("/")
     prefix = cfg["_prefix"]
 
+    write_images(cfg, [p["category"] for p in posts] or cfg["categories"])
+
     # 개별 글
     for p in posts:
+        img_slug = slug_for(p["category"])
+        img_url = f'{prefix}/images/banner-{img_slug}.svg'
         article = (
             f'<article>'
+            f'<img class="hero-img" src="{img_url}" alt="{html.escape(p["category"])} 대표 이미지" loading="lazy">'
             f'<p class="meta"><span class="cat">{html.escape(p["category"])}</span>'
             f' · {p["date"]} · 읽는 시간 약 {p["_reading"]}분</p>'
             f'<h1>{html.escape(p["title"])}</h1>'
@@ -211,15 +236,18 @@ def build():
             f'<p class="back"><a href="{prefix}/index.html">← 목록으로</a></p>'
         )
         out = page(cfg, p["title"], p["description"], article,
-                   f'{base}/posts/{p["slug"]}.html', is_post=True)
+                   f'{base}/posts/{p["slug"]}.html', is_post=True,
+                   og_image=f'{base}/images/banner-{img_slug}.svg')
         with open(os.path.join(POSTS_OUT, f'{p["slug"]}.html'), "w", encoding="utf-8") as f:
             f.write(out)
 
     # 홈
     cards = ""
     for p in posts:
+        thumb_slug = slug_for(p["category"])
         cards += (
             f'<a class="card" href="{prefix}/posts/{p["slug"]}.html">'
+            f'<img class="card-img" src="{prefix}/images/banner-{thumb_slug}.svg" alt="" loading="lazy">'
             f'<span class="cat">{html.escape(p["category"])}</span>'
             f'<h2>{html.escape(p["title"])}</h2>'
             f'<p>{html.escape(p["description"])}</p>'
@@ -343,12 +371,17 @@ main{max-width:760px;margin:0 auto;padding:28px 20px}
 .hero h1{font-size:1.9rem;margin:.2em 0}
 .grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:20px}
 @media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
-.card{display:block;border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--soft);transition:.15s}
+.card{display:block;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--soft);transition:.15s}
 .card:hover{transform:translateY(-2px);text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.06)}
-.card h2{font-size:1.12rem;margin:8px 0}
-.card p{color:var(--muted);font-size:.94rem;margin:6px 0}
+.card-img{display:block;width:100%;aspect-ratio:3/1;object-fit:cover}
+.card .cat,.card h2,.card p,.card .date{margin-left:18px;margin-right:18px}
+.card .cat{margin-top:14px}
+.card h2{font-size:1.12rem;margin-top:8px;margin-bottom:8px}
+.card p{color:var(--muted);font-size:.94rem;margin-bottom:6px}
+.card .date{display:block;margin-bottom:16px}
 .cat{display:inline-block;font-size:.75rem;font-weight:700;color:var(--brand);background:#e7f5ef;padding:3px 9px;border-radius:999px}
 .date{font-size:.8rem;color:var(--muted)}
+.hero-img{display:block;width:100%;aspect-ratio:3/1;object-fit:cover;border-radius:14px;margin-bottom:20px}
 .post h1{font-size:1.7rem;line-height:1.35}
 .post h2{margin-top:1.6em;border-left:4px solid var(--brand);padding-left:10px}
 .post .meta{color:var(--muted);font-size:.88rem}

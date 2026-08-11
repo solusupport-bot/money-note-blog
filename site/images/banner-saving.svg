@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400"
+     role="img" aria-label="생활비 절약">
+  <defs>
+    <linearGradient id="g-saving" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d7d5a"/>
+      <stop offset="100%" stop-color="#14a37a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="400" fill="url(#g-saving)"/>
+  <g transform="translate(80,80)">
+      <circle cx="60" cy="180" r="55" fill="none" stroke="#ffffff" stroke-width="8"/>
+      <circle cx="60" cy="180" r="26" fill="none" stroke="#ffffff" stroke-width="4" opacity="0.55"/>
+      <circle cx="150" cy="150" r="55" fill="none" stroke="#ffffff" stroke-width="8"/>
+      <circle cx="150" cy="150" r="26" fill="none" stroke="#ffffff" stroke-width="4" opacity="0.55"/>
+    </g>
+  <text x="80" y="330" font-family="'Segoe UI','Noto Sans KR',sans-serif" font-size="52"
+        font-weight="800" fill="#ffffff">생활비 절약</text>
+  <text x="80" y="368" font-family="'Segoe UI','Noto Sans KR',sans-serif" font-size="22"
+        fill="#d7f0e6">알뜰살뜰 머니노트</text>
+</svg>

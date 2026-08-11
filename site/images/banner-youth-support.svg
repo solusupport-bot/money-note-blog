@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400"
+     role="img" aria-label="청년·정부지원금">
+  <defs>
+    <linearGradient id="g-youth-support" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d7d5a"/>
+      <stop offset="100%" stop-color="#14a37a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="400" fill="url(#g-youth-support)"/>
+  <g transform="translate(80,80)">
+      <polygon points="0,55 120,5 240,55 120,105" fill="#ffffff"/>
+      <rect x="106" y="55" width="28" height="65" fill="#ffffff"/>
+      <circle cx="120" cy="145" r="9" fill="#ffffff"/>
+    </g>
+  <text x="80" y="330" font-family="'Segoe UI','Noto Sans KR',sans-serif" font-size="52"
+        font-weight="800" fill="#ffffff">청년·정부지원금</text>
+  <text x="80" y="368" font-family="'Segoe UI','Noto Sans KR',sans-serif" font-size="22"
+        fill="#d7f0e6">알뜰살뜰 머니노트</text>
+</svg>
