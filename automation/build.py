@@ -163,6 +163,7 @@ def page(cfg, title, description, body, canonical, is_post=False, og_image=None,
 <meta name="description" content="{html.escape(description)}">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="{p}/style.css">
+<link rel="alternate" type="application/rss+xml" title="{html.escape(cfg['site_name'])}" href="{p}/feed.xml">
 {gsc_tag}
 {og}
 {schema_tag}
@@ -348,11 +349,12 @@ def build():
     # 정적 페이지
     write_static_pages(cfg, base)
 
-    # 사이트맵 / robots / ads
+    # 사이트맵 / robots / ads / rss
     write_sitemap(cfg, base, posts)
     write_robots(base)
     write_ads(cfg)
     write_css()
+    write_rss(cfg, base, posts)
 
     print(f"빌드 완료: 글 {len(posts)}개 + 필수 페이지 4개 생성")
     print(f"결과물 위치: {SITE}")
@@ -428,6 +430,37 @@ def write_sitemap(cfg, base, posts):
 def write_robots(base):
     with open(os.path.join(SITE, "robots.txt"), "w", encoding="utf-8") as f:
         f.write(f"User-agent: *\nAllow: /\nSitemap: {base}/sitemap.xml\n")
+
+
+def write_rss(cfg, base, posts):
+    """새 글이 올라올 때마다 자동 갱신되는 RSS 피드.
+    RSS 리더 구독과, 이후 소셜 자동 포스팅 연동의 기반이 된다."""
+    items = ""
+    for p in posts[:20]:
+        pub_date = datetime.strptime(p["date"], "%Y-%m-%d").replace(
+            tzinfo=timezone.utc).strftime("%a, %d %b %Y %H:%M:%S %z")
+        link = f'{base}/posts/{p["slug"]}.html'
+        items += (
+            "  <item>\n"
+            f"    <title>{html.escape(p['title'])}</title>\n"
+            f"    <link>{link}</link>\n"
+            f"    <guid>{link}</guid>\n"
+            f"    <pubDate>{pub_date}</pubDate>\n"
+            f"    <description>{html.escape(p['description'])}</description>\n"
+            "  </item>\n"
+        )
+    body = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0"><channel>\n'
+        f"  <title>{html.escape(cfg['site_name'])}</title>\n"
+        f"  <link>{base}/</link>\n"
+        f"  <description>{html.escape(cfg['site_tagline'])}</description>\n"
+        f"  <language>{cfg['language']}</language>\n"
+        f"{items}"
+        "</channel></rss>\n"
+    )
+    with open(os.path.join(SITE, "feed.xml"), "w", encoding="utf-8") as f:
+        f.write(body)
 
 
 def write_ads(cfg):
