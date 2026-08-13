@@ -1,7 +1,7 @@
 ---
 title: 안 쓰는 구독료 찾아내는 3단계 점검법
 description: 매달 조용히 빠져나가는 구독료를 3단계로 색출하고 정리해 고정지출을 줄이는 방법.
-date: 2026-07-05
+date: 2026-08-13
 category: 구독·통신비 관리
 slug: subscription-audit
 ---

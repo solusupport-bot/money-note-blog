@@ -147,6 +147,8 @@ def page(cfg, title, description, body, canonical, is_post=False, og_image=None,
     year = datetime.now().year
     gsc = cfg.get("google_site_verification")
     gsc_tag = f'<meta name="google-site-verification" content="{gsc}" />' if gsc else ""
+    robots_tag = ('<meta name="robots" content="noindex, nofollow">'
+                  if cfg.get("noindex") else "")
     schema_tag = ""
     if schema_json:
         blocks = schema_json if isinstance(schema_json, list) else [schema_json]
@@ -164,6 +166,7 @@ def page(cfg, title, description, body, canonical, is_post=False, og_image=None,
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="{p}/style.css">
 <link rel="alternate" type="application/rss+xml" title="{html.escape(cfg['site_name'])}" href="{p}/feed.xml">
+{robots_tag}
 {gsc_tag}
 {og}
 {schema_tag}
@@ -351,7 +354,7 @@ def build():
 
     # 사이트맵 / robots / ads / rss
     write_sitemap(cfg, base, posts)
-    write_robots(base)
+    write_robots(cfg, base)
     write_ads(cfg)
     write_css()
     write_rss(cfg, base, posts)
@@ -427,9 +430,12 @@ def write_sitemap(cfg, base, posts):
         f.write(body)
 
 
-def write_robots(base):
+def write_robots(cfg, base):
     with open(os.path.join(SITE, "robots.txt"), "w", encoding="utf-8") as f:
-        f.write(f"User-agent: *\nAllow: /\nSitemap: {base}/sitemap.xml\n")
+        if cfg.get("noindex"):
+            f.write("User-agent: *\nDisallow: /\n")
+        else:
+            f.write(f"User-agent: *\nAllow: /\nSitemap: {base}/sitemap.xml\n")
 
 
 def write_rss(cfg, base, posts):

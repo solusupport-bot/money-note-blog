@@ -1,3 +1,2 @@
 User-agent: *
-Allow: /
-Sitemap: https://solusupport-bot.github.io/money-note-blog/sitemap.xml
+Disallow: /

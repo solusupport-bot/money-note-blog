@@ -1,7 +1,7 @@
 ---
 title: 통장 쪼개기 4개면 충분한 이유와 세팅 방법
 description: 월급통장 하나로 다 쓰지 말고, 목적별 4개 통장으로 나눠 새는 돈을 막는 세팅 방법을 정리했습니다.
-date: 2026-08-12
+date: 2026-08-13
 category: 통장·예적금
 slug: account-splitting
 ---
