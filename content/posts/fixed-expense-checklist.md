@@ -1,7 +1,7 @@
 ---
 title: 당장 오늘부터 줄이는 고정지출 7가지 체크리스트
 description: 매달 자동으로 빠져나가는 고정지출을 항목별로 점검해 연간 수십만 원을 아끼는 실전 체크리스트.
-date: 2026-08-13
+date: 2026-08-11
 category: 생활비 절약
 slug: fixed-expense-checklist
 ---

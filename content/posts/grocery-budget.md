@@ -1,7 +1,7 @@
 ---
 title: 장보기 예산 30% 줄이는 실전 식비 관리법
 description: 충동구매와 음식물 낭비를 줄여 식비를 체계적으로 관리하는 장보기 전·중·후 실전 전략.
-date: 2026-08-13
+date: 2026-08-12
 category: 생활비 절약
 slug: grocery-budget
 ---

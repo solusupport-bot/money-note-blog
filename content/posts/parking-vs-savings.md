@@ -1,7 +1,7 @@
 ---
 title: 파킹통장 vs 자유적금, 상황별로 뭐가 유리할까
 description: 언제든 넣고 빼는 파킹통장과 목돈 모으는 자유적금의 차이를 상황별로 비교해 내게 맞는 선택을 돕습니다.
-date: 2026-08-13
+date: 2026-08-11
 category: 통장·예적금
 slug: parking-vs-savings
 ---
