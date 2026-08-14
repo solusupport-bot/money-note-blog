@@ -5,6 +5,13 @@
   <description>새는 돈을 막고, 모으는 힘을 키우는 생활 재테크 정보</description>
   <language>ko</language>
   <item>
+    <title>청년도약계좌 신청 자격과 유지 조건 한눈에</title>
+    <link>https://solusupport-bot.github.io/money-note-blog/posts/youth-leap-account.html</link>
+    <guid>https://solusupport-bot.github.io/money-note-blog/posts/youth-leap-account.html</guid>
+    <pubDate>Fri, 14 Aug 2026 00:00:00 +0000</pubDate>
+    <description>청년의 중장기 자산 형성을 돕는 청년도약계좌의 기본 구조와 신청 전 확인할 자격·유지 조건을 정리했습니다.</description>
+  </item>
+  <item>
     <title>알뜰폰 갈아타기 전에 꼭 확인할 5가지</title>
     <link>https://solusupport-bot.github.io/money-note-blog/posts/mvno-switch.html</link>
     <guid>https://solusupport-bot.github.io/money-note-blog/posts/mvno-switch.html</guid>
@@ -17,6 +24,13 @@
     <guid>https://solusupport-bot.github.io/money-note-blog/posts/grocery-budget.html</guid>
     <pubDate>Wed, 12 Aug 2026 00:00:00 +0000</pubDate>
     <description>충동구매와 음식물 낭비를 줄여 식비를 체계적으로 관리하는 장보기 전·중·후 실전 전략.</description>
+  </item>
+  <item>
+    <title>연말정산 13월의 월급 만드는 공제 항목 총정리</title>
+    <link>https://solusupport-bot.github.io/money-note-blog/posts/year-end-tax.html</link>
+    <guid>https://solusupport-bot.github.io/money-note-blog/posts/year-end-tax.html</guid>
+    <pubDate>Wed, 12 Aug 2026 00:00:00 +0000</pubDate>
+    <description>소득공제와 세액공제의 차이부터 놓치기 쉬운 항목까지, 연말정산 환급을 늘리는 핵심을 정리합니다.</description>
   </item>
   <item>
     <title>안 쓰는 구독료 찾아내는 3단계 점검법</title>
@@ -33,13 +47,6 @@
     <description>월급통장 하나로 다 쓰지 말고, 목적별 4개 통장으로 나눠 새는 돈을 막는 세팅 방법을 정리했습니다.</description>
   </item>
   <item>
-    <title>연말정산 13월의 월급 만드는 공제 항목 총정리</title>
-    <link>https://solusupport-bot.github.io/money-note-blog/posts/year-end-tax.html</link>
-    <guid>https://solusupport-bot.github.io/money-note-blog/posts/year-end-tax.html</guid>
-    <pubDate>Wed, 12 Aug 2026 00:00:00 +0000</pubDate>
-    <description>소득공제와 세액공제의 차이부터 놓치기 쉬운 항목까지, 연말정산 환급을 늘리는 핵심을 정리합니다.</description>
-  </item>
-  <item>
     <title>당장 오늘부터 줄이는 고정지출 7가지 체크리스트</title>
     <link>https://solusupport-bot.github.io/money-note-blog/posts/fixed-expense-checklist.html</link>
     <guid>https://solusupport-bot.github.io/money-note-blog/posts/fixed-expense-checklist.html</guid>
@@ -47,17 +54,17 @@
     <description>매달 자동으로 빠져나가는 고정지출을 항목별로 점검해 연간 수십만 원을 아끼는 실전 체크리스트.</description>
   </item>
   <item>
-    <title>파킹통장 vs 자유적금, 상황별로 뭐가 유리할까</title>
-    <link>https://solusupport-bot.github.io/money-note-blog/posts/parking-vs-savings.html</link>
-    <guid>https://solusupport-bot.github.io/money-note-blog/posts/parking-vs-savings.html</guid>
-    <pubDate>Tue, 11 Aug 2026 00:00:00 +0000</pubDate>
-    <description>언제든 넣고 빼는 파킹통장과 목돈 모으는 자유적금의 차이를 상황별로 비교해 내게 맞는 선택을 돕습니다.</description>
-  </item>
-  <item>
     <title>2026년 놓치면 손해인 청년 지원 제도 정리</title>
     <link>https://solusupport-bot.github.io/money-note-blog/posts/youth-support-2026.html</link>
     <guid>https://solusupport-bot.github.io/money-note-blog/posts/youth-support-2026.html</guid>
     <pubDate>Tue, 11 Aug 2026 00:00:00 +0000</pubDate>
     <description>자산 형성부터 주거·취업까지, 청년이라면 확인해볼 만한 대표 지원 제도를 유형별로 정리했습니다.</description>
+  </item>
+  <item>
+    <title>파킹통장 vs 자유적금, 상황별로 뭐가 유리할까</title>
+    <link>https://solusupport-bot.github.io/money-note-blog/posts/parking-vs-savings.html</link>
+    <guid>https://solusupport-bot.github.io/money-note-blog/posts/parking-vs-savings.html</guid>
+    <pubDate>Tue, 11 Aug 2026 00:00:00 +0000</pubDate>
+    <description>언제든 넣고 빼는 파킹통장과 목돈 모으는 자유적금의 차이를 상황별로 비교해 내게 맞는 선택을 돕습니다.</description>
   </item>
 </channel></rss>
