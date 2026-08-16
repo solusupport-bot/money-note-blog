@@ -1,7 +1,7 @@
 ---
 title: 청년내일저축계좌 조건과 신청 방법 정리
 description: 저소득 청년의 자립을 돕는 청년내일저축계좌의 지원 구조와 신청 자격, 유지 조건을 정리했습니다.
-date: 2026-08-18
+date: 2026-08-16
 category: 청년·정부지원금
 slug: youth-savings-account
 ---
