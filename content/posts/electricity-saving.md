@@ -1,7 +1,7 @@
 ---
 title: 전기요금 아끼는 가전 사용 습관 총정리
 description: 에어컨·냉장고·세탁기 등 가전별로 전기요금을 줄이는 사용 습관과 누진세 구조를 정리했습니다.
-date: 2026-08-17
+date: 2026-08-16
 category: 생활비 절약
 slug: electricity-saving
 ---
