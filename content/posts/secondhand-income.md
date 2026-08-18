@@ -1,7 +1,7 @@
 ---
 title: 중고거래로 부수입 만드는 안전한 방법
 description: 안 쓰는 물건을 정리해 부수입을 만들면서도 사기·분쟁을 피하는 중고거래 실전 노하우를 정리했습니다.
-date: 2026-08-21
+date: 2026-08-18
 category: 생활비 절약
 slug: secondhand-income
 ---
