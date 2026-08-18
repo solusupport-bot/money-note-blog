@@ -1,7 +1,7 @@
 ---
 title: IRP vs 연금저축, 세액공제 한도 차이
 description: 노후 대비와 절세를 동시에 챙기는 IRP와 연금저축계좌, 각각의 한도와 특징을 비교해 어떻게 조합할지 정리했습니다.
-date: 2026-08-20
+date: 2026-08-18
 category: 세금·연말정산
 slug: irp-vs-pension
 ---
