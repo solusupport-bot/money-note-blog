@@ -1,7 +1,7 @@
 ---
 title: 카드값 밀렸을 때 대처 순서
 description: 신용카드 대금 연체가 걱정될 때, 신용점수 타격을 최소화하며 상황을 정리하는 실전 대처 순서를 정리했습니다.
-date: 2026-08-23
+date: 2026-08-19
 category: 통장·예적금
 slug: late-card-payment
 ---
