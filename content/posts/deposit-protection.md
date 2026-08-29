@@ -1,7 +1,7 @@
 ---
 title: 예금자보호제도, 5천만원 한도 제대로 알기
 description: 은행이 망해도 내 돈을 지켜주는 예금자보호제도, 한도와 적용 범위를 정확히 알아야 진짜 안전하게 분산할 수 있습니다.
-date: 2026-09-02
+date: 2026-08-29
 category: 통장·예적금
 slug: deposit-protection
 ---
