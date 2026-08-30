@@ -1,7 +1,7 @@
 ---
 title: 청년월세지원 신청 자격과 절차
 description: 월세 부담을 덜어주는 청년월세지원, 자격 요건부터 신청 순서까지 한눈에 정리했습니다.
-date: 2026-09-03
+date: 2026-08-30
 category: 청년·정부지원금
 slug: youth-rent-support
 ---
