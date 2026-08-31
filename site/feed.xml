@@ -5,6 +5,13 @@
   <description>새는 돈을 막고, 모으는 힘을 키우는 생활 재테크 정보</description>
   <language>ko</language>
   <item>
+    <title>부양가족 등록으로 세금 아끼는 법</title>
+    <link>https://solusupport-bot.github.io/money-note-blog/posts/dependent-deduction.html</link>
+    <guid>https://solusupport-bot.github.io/money-note-blog/posts/dependent-deduction.html</guid>
+    <pubDate>Mon, 31 Aug 2026 00:00:00 +0000</pubDate>
+    <description>연말정산에서 자주 놓치는 부양가족 공제, 등록 기준과 놓치기 쉬운 포인트를 정리했습니다.</description>
+  </item>
+  <item>
     <title>청년월세지원 신청 자격과 절차</title>
     <link>https://solusupport-bot.github.io/money-note-blog/posts/youth-rent-support.html</link>
     <guid>https://solusupport-bot.github.io/money-note-blog/posts/youth-rent-support.html</guid>
@@ -136,12 +143,5 @@
     <guid>https://solusupport-bot.github.io/money-note-blog/posts/fixed-expense-checklist.html</guid>
     <pubDate>Tue, 11 Aug 2026 00:00:00 +0000</pubDate>
     <description>매달 자동으로 빠져나가는 고정지출을 항목별로 점검해 연간 수십만 원을 아끼는 실전 체크리스트.</description>
-  </item>
-  <item>
-    <title>2026년 놓치면 손해인 청년 지원 제도 정리</title>
-    <link>https://solusupport-bot.github.io/money-note-blog/posts/youth-support-2026.html</link>
-    <guid>https://solusupport-bot.github.io/money-note-blog/posts/youth-support-2026.html</guid>
-    <pubDate>Tue, 11 Aug 2026 00:00:00 +0000</pubDate>
-    <description>자산 형성부터 주거·취업까지, 청년이라면 확인해볼 만한 대표 지원 제도를 유형별로 정리했습니다.</description>
   </item>
 </channel></rss>

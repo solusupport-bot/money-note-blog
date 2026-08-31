@@ -1,7 +1,7 @@
 ---
 title: 부양가족 등록으로 세금 아끼는 법
 description: 연말정산에서 자주 놓치는 부양가족 공제, 등록 기준과 놓치기 쉬운 포인트를 정리했습니다.
-date: 2026-09-04
+date: 2026-08-31
 category: 세금·연말정산
 slug: dependent-deduction
 ---
