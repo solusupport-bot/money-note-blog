@@ -1,7 +1,7 @@
 ---
 title: 가족결합 할인으로 통신비 줄이는 법
 description: 가족끼리 통신사를 합치면 얼마나 절약되는지, 결합할인의 구조와 챙길 점을 정리했습니다.
-date: 2026-09-05
+date: 2026-09-01
 category: 구독·통신비 관리
 slug: family-bundle-discount
 ---
