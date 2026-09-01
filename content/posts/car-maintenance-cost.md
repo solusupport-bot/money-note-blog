@@ -1,7 +1,7 @@
 ---
 title: 자동차 유지비 아끼는 습관
 description: 연료비부터 보험료, 소모품 교체까지 자동차 유지비를 체계적으로 줄이는 실전 방법을 정리했습니다.
-date: 2026-09-06
+date: 2026-09-01
 category: 생활비 절약
 slug: car-maintenance-cost
 ---
