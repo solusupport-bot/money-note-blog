@@ -1,7 +1,7 @@
 ---
 title: 마이너스통장 vs 신용대출, 뭐가 다를까
 description: 급전이 필요할 때 헷갈리는 마이너스통장과 신용대출의 차이를 상황별로 비교해 정리했습니다.
-date: 2026-09-07
+date: 2026-09-02
 category: 통장·예적금
 slug: overdraft-vs-loan
 ---
