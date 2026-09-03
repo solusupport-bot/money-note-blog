@@ -1,7 +1,7 @@
 ---
 title: 국민취업지원제도 지원금 받는 법
 description: 구직활동 중인 분들을 위한 국민취업지원제도의 지원 내용과 신청 자격을 정리했습니다.
-date: 2026-09-08
+date: 2026-09-03
 category: 청년·정부지원금
 slug: employment-support-program
 ---

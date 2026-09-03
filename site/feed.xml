@@ -5,6 +5,13 @@
   <description>새는 돈을 막고, 모으는 힘을 키우는 생활 재테크 정보</description>
   <language>ko</language>
   <item>
+    <title>국민취업지원제도 지원금 받는 법</title>
+    <link>https://solusupport-bot.github.io/money-note-blog/posts/employment-support-program.html</link>
+    <guid>https://solusupport-bot.github.io/money-note-blog/posts/employment-support-program.html</guid>
+    <pubDate>Thu, 03 Sep 2026 00:00:00 +0000</pubDate>
+    <description>구직활동 중인 분들을 위한 국민취업지원제도의 지원 내용과 신청 자격을 정리했습니다.</description>
+  </item>
+  <item>
     <title>마이너스통장 vs 신용대출, 뭐가 다를까</title>
     <link>https://solusupport-bot.github.io/money-note-blog/posts/overdraft-vs-loan.html</link>
     <guid>https://solusupport-bot.github.io/money-note-blog/posts/overdraft-vs-loan.html</guid>
@@ -12,18 +19,18 @@
     <description>급전이 필요할 때 헷갈리는 마이너스통장과 신용대출의 차이를 상황별로 비교해 정리했습니다.</description>
   </item>
   <item>
-    <title>가족결합 할인으로 통신비 줄이는 법</title>
-    <link>https://solusupport-bot.github.io/money-note-blog/posts/family-bundle-discount.html</link>
-    <guid>https://solusupport-bot.github.io/money-note-blog/posts/family-bundle-discount.html</guid>
-    <pubDate>Tue, 01 Sep 2026 00:00:00 +0000</pubDate>
-    <description>가족끼리 통신사를 합치면 얼마나 절약되는지, 결합할인의 구조와 챙길 점을 정리했습니다.</description>
-  </item>
-  <item>
     <title>자동차 유지비 아끼는 습관</title>
     <link>https://solusupport-bot.github.io/money-note-blog/posts/car-maintenance-cost.html</link>
     <guid>https://solusupport-bot.github.io/money-note-blog/posts/car-maintenance-cost.html</guid>
     <pubDate>Tue, 01 Sep 2026 00:00:00 +0000</pubDate>
     <description>연료비부터 보험료, 소모품 교체까지 자동차 유지비를 체계적으로 줄이는 실전 방법을 정리했습니다.</description>
+  </item>
+  <item>
+    <title>가족결합 할인으로 통신비 줄이는 법</title>
+    <link>https://solusupport-bot.github.io/money-note-blog/posts/family-bundle-discount.html</link>
+    <guid>https://solusupport-bot.github.io/money-note-blog/posts/family-bundle-discount.html</guid>
+    <pubDate>Tue, 01 Sep 2026 00:00:00 +0000</pubDate>
+    <description>가족끼리 통신사를 합치면 얼마나 절약되는지, 결합할인의 구조와 챙길 점을 정리했습니다.</description>
   </item>
   <item>
     <title>부양가족 등록으로 세금 아끼는 법</title>
@@ -61,6 +68,13 @@
     <description>신용카드 대금 연체가 걱정될 때, 신용점수 타격을 최소화하며 상황을 정리하는 실전 대처 순서를 정리했습니다.</description>
   </item>
   <item>
+    <title>IRP vs 연금저축, 세액공제 한도 차이</title>
+    <link>https://solusupport-bot.github.io/money-note-blog/posts/irp-vs-pension.html</link>
+    <guid>https://solusupport-bot.github.io/money-note-blog/posts/irp-vs-pension.html</guid>
+    <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+    <description>노후 대비와 절세를 동시에 챙기는 IRP와 연금저축계좌, 각각의 한도와 특징을 비교해 어떻게 조합할지 정리했습니다.</description>
+  </item>
+  <item>
     <title>첫 직장인을 위한 4대보험 완전 정리</title>
     <link>https://solusupport-bot.github.io/money-note-blog/posts/four-insurances.html</link>
     <guid>https://solusupport-bot.github.io/money-note-blog/posts/four-insurances.html</guid>
@@ -75,13 +89,6 @@
     <description>안 쓰는 물건을 정리해 부수입을 만들면서도 사기·분쟁을 피하는 중고거래 실전 노하우를 정리했습니다.</description>
   </item>
   <item>
-    <title>IRP vs 연금저축, 세액공제 한도 차이</title>
-    <link>https://solusupport-bot.github.io/money-note-blog/posts/irp-vs-pension.html</link>
-    <guid>https://solusupport-bot.github.io/money-note-blog/posts/irp-vs-pension.html</guid>
-    <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
-    <description>노후 대비와 절세를 동시에 챙기는 IRP와 연금저축계좌, 각각의 한도와 특징을 비교해 어떻게 조합할지 정리했습니다.</description>
-  </item>
-  <item>
     <title>무주택자 전월세 대출 종류와 조건 비교</title>
     <link>https://solusupport-bot.github.io/money-note-blog/posts/jeonwolse-loan.html</link>
     <guid>https://solusupport-bot.github.io/money-note-blog/posts/jeonwolse-loan.html</guid>
@@ -89,11 +96,11 @@
     <description>전세자금대출과 월세대출, 어떤 상황에 어떤 상품이 유리한지 무주택자 기준으로 비교 정리했습니다.</description>
   </item>
   <item>
-    <title>청년내일저축계좌 조건과 신청 방법 정리</title>
-    <link>https://solusupport-bot.github.io/money-note-blog/posts/youth-savings-account.html</link>
-    <guid>https://solusupport-bot.github.io/money-note-blog/posts/youth-savings-account.html</guid>
+    <title>전기요금 아끼는 가전 사용 습관 총정리</title>
+    <link>https://solusupport-bot.github.io/money-note-blog/posts/electricity-saving.html</link>
+    <guid>https://solusupport-bot.github.io/money-note-blog/posts/electricity-saving.html</guid>
     <pubDate>Sun, 16 Aug 2026 00:00:00 +0000</pubDate>
-    <description>저소득 청년의 자립을 돕는 청년내일저축계좌의 지원 구조와 신청 자격, 유지 조건을 정리했습니다.</description>
+    <description>에어컨·냉장고·세탁기 등 가전별로 전기요금을 줄이는 사용 습관과 누진세 구조를 정리했습니다.</description>
   </item>
   <item>
     <title>신용점수 쉽게 올리는 5가지 습관</title>
@@ -103,11 +110,11 @@
     <description>대출 금리와 한도에 직결되는 신용점수, 특별한 비용 없이 꾸준히 실천하면 개선되는 습관 5가지를 정리했습니다.</description>
   </item>
   <item>
-    <title>전기요금 아끼는 가전 사용 습관 총정리</title>
-    <link>https://solusupport-bot.github.io/money-note-blog/posts/electricity-saving.html</link>
-    <guid>https://solusupport-bot.github.io/money-note-blog/posts/electricity-saving.html</guid>
+    <title>청년내일저축계좌 조건과 신청 방법 정리</title>
+    <link>https://solusupport-bot.github.io/money-note-blog/posts/youth-savings-account.html</link>
+    <guid>https://solusupport-bot.github.io/money-note-blog/posts/youth-savings-account.html</guid>
     <pubDate>Sun, 16 Aug 2026 00:00:00 +0000</pubDate>
-    <description>에어컨·냉장고·세탁기 등 가전별로 전기요금을 줄이는 사용 습관과 누진세 구조를 정리했습니다.</description>
+    <description>저소득 청년의 자립을 돕는 청년내일저축계좌의 지원 구조와 신청 자격, 유지 조건을 정리했습니다.</description>
   </item>
   <item>
     <title>프리랜서 종합소득세 처음이라면 이 순서대로</title>
@@ -131,17 +138,10 @@
     <description>통신비를 반값으로 줄여주는 알뜰폰, 갈아타기 전에 후회하지 않으려면 확인해야 할 체크포인트를 정리했습니다.</description>
   </item>
   <item>
-    <title>장보기 예산 30% 줄이는 실전 식비 관리법</title>
-    <link>https://solusupport-bot.github.io/money-note-blog/posts/grocery-budget.html</link>
-    <guid>https://solusupport-bot.github.io/money-note-blog/posts/grocery-budget.html</guid>
+    <title>안 쓰는 구독료 찾아내는 3단계 점검법</title>
+    <link>https://solusupport-bot.github.io/money-note-blog/posts/subscription-audit.html</link>
+    <guid>https://solusupport-bot.github.io/money-note-blog/posts/subscription-audit.html</guid>
     <pubDate>Wed, 12 Aug 2026 00:00:00 +0000</pubDate>
-    <description>충동구매와 음식물 낭비를 줄여 식비를 체계적으로 관리하는 장보기 전·중·후 실전 전략.</description>
-  </item>
-  <item>
-    <title>연말정산 13월의 월급 만드는 공제 항목 총정리</title>
-    <link>https://solusupport-bot.github.io/money-note-blog/posts/year-end-tax.html</link>
-    <guid>https://solusupport-bot.github.io/money-note-blog/posts/year-end-tax.html</guid>
-    <pubDate>Wed, 12 Aug 2026 00:00:00 +0000</pubDate>
-    <description>소득공제와 세액공제의 차이부터 놓치기 쉬운 항목까지, 연말정산 환급을 늘리는 핵심을 정리합니다.</description>
+    <description>매달 조용히 빠져나가는 구독료를 3단계로 색출하고 정리해 고정지출을 줄이는 방법.</description>
   </item>
 </channel></rss>
