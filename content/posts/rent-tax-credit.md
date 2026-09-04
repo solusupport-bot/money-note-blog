@@ -1,7 +1,7 @@
 ---
 title: 월세 세액공제 받는 법
 description: 무주택 근로자가 놓치기 쉬운 월세 세액공제, 신청 자격과 준비 서류를 정리했습니다.
-date: 2026-09-09
+date: 2026-09-04
 category: 세금·연말정산
 slug: rent-tax-credit
 ---
