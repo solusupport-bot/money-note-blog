@@ -1,7 +1,7 @@
 ---
 title: 무료로 즐기는 여가생활 아이디어
 description: 돈 안 들이고도 알차게 즐길 수 있는 여가 활동을 지역·문화·야외 활동 중심으로 정리했습니다.
-date: 2026-09-11
+date: 2026-09-06
 category: 생활비 절약
 slug: free-leisure
 ---
