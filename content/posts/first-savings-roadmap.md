@@ -1,7 +1,7 @@
 ---
 title: 사회초년생 첫 저축 로드맵
 description: 첫 월급을 받은 사회초년생이 순서대로 따라 할 수 있는 저축·자산관리 시작 가이드입니다.
-date: 2026-09-12
+date: 2026-09-07
 category: 통장·예적금
 slug: first-savings-roadmap
 ---
