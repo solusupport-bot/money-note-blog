@@ -1,3 +1,10 @@
 __pycache__/
 *.pyc
 ops/local-cron/*.log
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example

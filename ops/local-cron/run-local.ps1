@@ -3,9 +3,10 @@
 # publish_next.py -> build.py -> git commit/push)을 이 PC에서 직접 실행한다.
 # 작업 스케줄러: MoneyNoteBlog-HourlyBuild (1시간마다)
 #
-# GitHub Pages는 원래 actions/deploy-pages로 배포되는데 그것도 Actions 정지로 막혀
-# 있다. 당장은 publish_gate/publish_next/build + git push까지만 로컬에서 대신하고
-# (커밋 내용은 안전하게 origin에 쌓인다), Pages 배포 자체는 Actions 복구 후 처리한다.
+# GitHub Pages는 원래 actions/deploy-pages로 배포됐는데 Actions 정지로 막혀 있었다.
+# 2026-10-16: money-note-blog가 private 레포라 Free 플랜에서는 애초에 GitHub Pages
+# 자체가 안 되는 걸 확인하고, land-in-korea/pickloot-site와 같은 방식으로 Cloudflare
+# Pages(Workers)로 직접 배포하도록 전환했다. git push는 백업/이력용으로 계속 한다.
 
 $repo = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $logFile = Join-Path $PSScriptRoot "run-local.log"
@@ -55,6 +56,12 @@ try {
 
     git push -q origin main 2>&1 | Out-Null
     if ($LASTEXITCODE -ne 0) { Log "WARN: git push 실패 — 원격에 새 커밋이 있을 수 있음, 다음 실행에서 재시도됨" } else { Log "OK: push 완료" }
+
+    if ($didCommit) {
+        $deployOut = & npx wrangler pages deploy site --project-name=money-note-blog --branch=main --commit-dirty=true 2>&1 | Out-String
+        Add-Content -Path $logFile -Value $deployOut -Encoding utf8
+        if ($LASTEXITCODE -ne 0) { Log "FAIL: wrangler pages deploy (exit $LASTEXITCODE)" } else { Log "OK: wrangler pages deploy 완료" }
+    }
 } finally {
     $mutex.ReleaseMutex()
 }
