@@ -58,7 +58,7 @@ try {
     if ($LASTEXITCODE -ne 0) { Log "WARN: git push 실패 — 원격에 새 커밋이 있을 수 있음, 다음 실행에서 재시도됨" } else { Log "OK: push 완료" }
 
     if ($didCommit) {
-        $deployOut = & npx wrangler pages deploy site --project-name=money-note-blog --branch=main --commit-dirty=true 2>&1 | Out-String
+        $deployOut = & npx wrangler deploy 2>&1 | Out-String
         Add-Content -Path $logFile -Value $deployOut -Encoding utf8
         if ($LASTEXITCODE -ne 0) { Log "FAIL: wrangler pages deploy (exit $LASTEXITCODE)" } else { Log "OK: wrangler pages deploy 완료" }
     }
