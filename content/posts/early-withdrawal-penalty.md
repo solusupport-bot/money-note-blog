@@ -1,7 +1,7 @@
 ---
 title: 예적금 중도해지 손해 최소화하는 법
 description: 급하게 적금을 깨야 할 때 이자를 가장 적게 손해 보는 방법과,애초에 중도해지를 피하는 설계 팁을 정리했습니다.
-date: 2026-10-16
+date: 2026-10-17
 category: 통장·예적금
 slug: early-withdrawal-penalty
 ---
