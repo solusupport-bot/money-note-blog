@@ -1,7 +1,7 @@
 ---
 title: 근로장려금·자녀장려금 신청 자격과 방법
 description: 몰라서 못 받는 돈, 근로장려금과 자녀장려금의 차이와 신청 자격, 놓치지 않는 신청 시기를 정리했습니다.
-date: 2026-10-16
+date: 2026-10-18
 category: 세금·연말정산
 slug: eitc-child-tax-credit
 ---
