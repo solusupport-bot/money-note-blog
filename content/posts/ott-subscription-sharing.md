@@ -1,7 +1,7 @@
 ---
 title: OTT 구독 공유 서비스 똑똑하게 쓰는 법
 description: 넷플릭스·디즈니+ 등 OTT 구독료를 나눠 내는 공유 서비스, 이용 전에 알아야 할 요금제별 규칙과 주의할 점을 정리했습니다.
-date: 2026-10-16
+date: 2026-10-19
 category: 구독·통신비 관리
 slug: ott-subscription-sharing
 ---
