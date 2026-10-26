@@ -1,7 +1,7 @@
 ---
 title: 예적금 중도해지 손해 최소화하는 법
 description: 급하게 돈이 필요해 적금을 깨야 할 때, 손해를 최소화하는 순서와 중도해지 전에 확인해야 할 것들을 정리했습니다.
-date: 2026-10-25
+date: 2026-10-26
 category: 통장·예적금
 slug: early-withdrawal-savings-loss
 ---
