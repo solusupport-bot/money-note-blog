@@ -1,7 +1,7 @@
 ---
 title: 근로장려금·자녀장려금 신청 자격과 방법
 description: 매년 놓치는 사람이 많은 근로장려금·자녀장려금의 기본 구조와 신청 자격 확인 포인트를 정리했습니다.
-date: 2026-10-25
+date: 2026-10-28
 category: 세금·연말정산
 slug: earned-income-tax-credit
 ---
