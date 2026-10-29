@@ -1,7 +1,7 @@
 ---
 title: 청년전용 전세자금대출 종류와 한도 비교
 description: 이름이 비슷해 헷갈리는 청년전용 전세자금대출 상품들의 기본 구조와 비교 포인트를 정리했습니다.
-date: 2026-10-25
+date: 2026-10-29
 category: 청년·정부지원금
 slug: youth-jeonse-loan-comparison
 ---
